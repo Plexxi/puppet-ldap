@@ -1,0 +1,5 @@
+puppet-module-plexxi-ldap (1.0.0) UNRELEASED; urgency=medium
+
+  * Initial release.
+
+ -- Matthew Morgan <matt.morgan@plexxi.com>  Wed, 29 Sep 2016 11:15:50 -0400

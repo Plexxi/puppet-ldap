@@ -1,0 +1,21 @@
+Source: puppet-module-plexxi-ldap
+Maintainer: Matthew Morgan <matt.morgan@plexxi.com>
+Section: admin
+Priority: optional
+Build-Depends: debhelper (>= 8)
+Standards-Version: 3.9.6
+Homepage: http://www.plexxi.com/
+
+Package: puppet-module-plexxi-ldap
+Architecture: all
+Depends: ${misc:Depends},
+         puppet-common (>= 3),
+         puppet-module-puppetlabs-stdlib
+Description: Puppet module for LDAP PAM/NSS
+ Puppet lets you centrally manage every important aspect of your system
+ using a cross-platform specification language that manages all the
+ separate elements normally aggregated in different files, like users,
+ cron jobs, and hosts, along with obviously discrete elements like
+ packages, services, and files.
+ .
+ The ldap module manages LDAP PAM and NSS settings.

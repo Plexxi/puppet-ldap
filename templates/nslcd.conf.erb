@@ -1,0 +1,22 @@
+#
+# This file is managed by Puppet.
+# Any changes will likely be overwritten
+#
+# /etc/nslcd.conf
+# nslcd configuration file. See nslcd.conf(5)
+# for details.
+
+# The user and group nslcd should run as.
+uid nslcd
+gid nslcd
+
+# The location at which the LDAP server(s) should be reachable.
+uri <%= @uri %>
+
+# The search base that will be used for all queries.
+base  <%= @basedn %>
+
+<% if @binddn -%>
+binddn <%= @binddn %>
+bindpw <%= @bindpw %>
+<% end -%>
