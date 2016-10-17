@@ -47,7 +47,7 @@ class ldap(
   $uri,
   $basedn,
   $binddn     = undef,
-  bindpw      = undef,
+  $bindpw     = undef,
   $pam_enable = true,
   $nsswitch   = false,
 ) {
