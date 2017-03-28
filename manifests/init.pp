@@ -51,6 +51,9 @@ class ldap(
   $pam_enable = true,
   $nsswitch   = false,
 ) {
+  exec { 'ldap_name_restart':
+       command => '/usr/sbin/service nscd restart && /usr/sbin/service nslcd restart',
+  }
   if $pam_enable {
      file { '/etc/nslcd.conf':
        ensure  => file,
@@ -59,7 +62,7 @@ class ldap(
        mode    => '0600',
        content => template('ldap/nslcd.conf.erb'),
      }
-     exec { 'pam_auth_update':
+     exec { 'ldap_pam_auth_update':
        environment => ["DEBIAN_FRONTEND=editor",
                        "PLEXXI_AUTH_UPDATE=ldap",
                        "PLEXXI_AUTH_ENABLE=1",
@@ -68,7 +71,7 @@ class ldap(
      }
      if $nsswitch {
        # setup/add ldap to nsswitch.conf
-       augeas { 'nsswitch_add':
+       augeas { 'ldap_nsswitch_add':
          context => "/files/etc/nsswitch.conf",
          onlyif  => "get /files/etc/nsswitch.conf/*[self::database = 'passwd']/service[.='ldap'] == ''",
          changes => [
@@ -77,52 +80,34 @@ class ldap(
            "ins service after /files/etc/nsswitch.conf/*[self::database = 'group']/service[last()]",
            "set /files/etc/nsswitch.conf/*[self::database = 'group']/service[last()] ldap"
          ],
-         notify => [ Service[nscd], Service[nslcd] ],
-       }
-       service {"nscd":
-         ensure  => running,
-       }
-       service {"nslcd":
-         ensure  => running,
+         notify => [ Exec[ldap_name_restart] ],
        }
      } else {
        # remove ldap from nsswitch.conf
-       augeas { 'nsswitch_remove':
+       augeas { 'ldap_nsswitch_remove':
          context => "/files/etc/nsswitch.conf",
          changes => [
            "rm /files/etc/nsswitch.conf/*[self::database = 'passwd']/service[.='ldap']",
            "rm /files/etc/nsswitch.conf/*[self::database = 'group']/service[.='ldap']",
          ],
-         notify => [ Service["nscd"], Service[nslcd] ],
-       }
-       service {"nscd":
-         ensure  => running,
-       }
-       service {"nslcd":
-         ensure  => running,
+         notify => [ Exec[ldap_name_restart] ],
        }
      }
   } else {
-     exec { 'pam_auth_update':
+     exec { 'ldap_pam_auth_update':
        environment => ["DEBIAN_FRONTEND=editor",
                        "PLEXXI_AUTH_UPDATE=ldap",
                        "PLEXXI_AUTH_ENABLE=0",
                        "EDITOR=/opt/plexxi/bin/px-auth-update"],
        command => '/usr/sbin/pam-auth-update',
      }
-     augeas { 'nsswitch_remove':
+     augeas { 'ldap_nsswitch_remove':
        context => "/files/etc/nsswitch.conf",
        changes => [
          "rm /files/etc/nsswitch.conf/*[self::database = 'passwd']/service[.='ldap']",
          "rm /files/etc/nsswitch.conf/*[self::database = 'group']/service[.='ldap']",
        ],
-       notify => [ Service["nscd"], Service[nslcd] ],
-     }
-     service {"nscd":
-       ensure  => running,
-     }
-     service {"nslcd":
-       ensure  => running,
+       notify => [ Exec[ldap_name_restart] ],
      }
   }
 }
