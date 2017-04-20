@@ -18,6 +18,21 @@
 # [bindpw]
 #   LDAP default bind password
 #   *Optional*
+# [ssl]
+#   LDAP encryption.  Values are "on", "off", or "start_tls"
+#   *Optional*
+# [tls_reqcert]
+#   LDAP encryption.  Values are "never", "allow", "try", "demand", or "hard"
+#   *Optional*
+# [tls_cacertfile]
+#   LDAP encryption.  Path to X.509 certificate
+#   *Optional*
+# [tls_cert]
+#   LDAP encryption.  Path to local certificate file for client TLS authentication
+#   *Optional*
+# [tls_key]
+#   LDAP encryption.  Path to private key file for client TLS authentication
+#   *Optional*
 # [pam_enable]
 #   If enabled (pam_enable => true) enables the LDAP PAM module.
 #   *Optional* (defaults to true)
@@ -29,7 +44,7 @@
 # === Examples
 #
 #  class { 'ldap':
-#    uri => 'ldap://example.ldap.com ldap://another.ldap.com'
+#    uri => ['ldap://example.ldap.com, ldap://another.ldap.com']
 #    basedn => 'dc=suffix',
 #    binddn => 'cn=bindUser'
 #    bindpw => 'pass_word'
@@ -46,10 +61,13 @@
 class ldap( 
   $uri,
   $basedn,
-  $binddn     = undef,
-  $bindpw     = undef,
-  $pam_enable = true,
-  $nsswitch   = false,
+  $binddn         = undef,
+  $bindpw         = undef,
+  $ssl            = undef,
+  $tls_reqcert    = undef,
+  $tls_cacertfile = undef,
+  $pam_enable     = true,
+  $nsswitch       = false,
 ) {
   exec { 'ldap_name_restart':
        command => '/usr/sbin/service nscd restart && /usr/sbin/service nslcd restart',

@@ -1,3 +1,10 @@
+puppet-module-plexxi-ldap (1.0.2) unstable; urgency=medium
+
+  * Add SSL/TLS
+  * Support multiple URI
+
+ -- Matthew Morgan <matt.morgan@plexxi.com>  Thu, 20 Apr 2017 10:49:54 -0400
+
 puppet-module-plexxi-ldap (1.0.1) unstable; urgency=medium
 
   * Fix namespace clash
