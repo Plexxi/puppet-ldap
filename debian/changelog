@@ -1,3 +1,9 @@
+puppet-module-plexxi-ldap (1.0.3) unstable; urgency=medium
+
+  * Fix metadata version 
+
+ -- Matthew Morgan <matt.morgan@plexxi.com>  Tue, 15 Aug 2017 10:11:50 -0400
+
 puppet-module-plexxi-ldap (1.0.2) unstable; urgency=medium
 
   * Add SSL/TLS

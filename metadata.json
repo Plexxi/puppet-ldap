@@ -1,6 +1,6 @@
 {
   "name": "plexxi-ldap",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "author": "plexxi",
   "summary": "Configure the LDAP PAM settings.",
   "license": "Apache 2.0",
