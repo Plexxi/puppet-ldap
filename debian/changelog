@@ -1,3 +1,9 @@
+puppet-module-plexxi-ldap (1.0.4) unstable; urgency=medium
+
+  * when adding to nsswitch.conf place ldap in front 
+
+ -- Matthew Morgan <matt.morgan@plexxi.com>  Thu, 26 Oct 2017 22:00:49 -0400
+
 puppet-module-plexxi-ldap (1.0.3) unstable; urgency=medium
 
   * Fix metadata version 

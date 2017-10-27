@@ -2,7 +2,7 @@ Source: puppet-module-plexxi-ldap
 Maintainer: Matthew Morgan <matt.morgan@plexxi.com>
 Section: admin
 Priority: optional
-Build-Depends: debhelper (>= 8)
+Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.6
 Homepage: http://www.plexxi.com/
 

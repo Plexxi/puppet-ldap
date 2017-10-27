@@ -69,6 +69,10 @@ class ldap(
   $pam_enable     = true,
   $nsswitch       = false,
 ) {
+
+  validate_bool($pam_enable)
+  validate_bool($nsswitch)
+
   exec { 'ldap_name_restart':
        command => '/usr/sbin/service nscd restart && /usr/sbin/service nslcd restart',
   }
@@ -93,10 +97,10 @@ class ldap(
          context => "/files/etc/nsswitch.conf",
          onlyif  => "get /files/etc/nsswitch.conf/*[self::database = 'passwd']/service[.='ldap'] == ''",
          changes => [
-           "ins service after /files/etc/nsswitch.conf/*[self::database = 'passwd']/service[last()]",
-           "set /files/etc/nsswitch.conf/*[self::database = 'passwd']/service[last()] ldap",
-           "ins service after /files/etc/nsswitch.conf/*[self::database = 'group']/service[last()]",
-           "set /files/etc/nsswitch.conf/*[self::database = 'group']/service[last()] ldap"
+           "ins service before /files/etc/nsswitch.conf/*[self::database = 'passwd']/service[1]",
+           "set /files/etc/nsswitch.conf/*[self::database = 'passwd']/service[1] ldap",
+           "ins service before /files/etc/nsswitch.conf/*[self::database = 'group']/service[1]",
+           "set /files/etc/nsswitch.conf/*[self::database = 'group']/service[1] ldap"
          ],
          notify => [ Exec[ldap_name_restart] ],
        }
