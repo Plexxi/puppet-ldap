@@ -66,6 +66,7 @@ class ldap(
   $ssl            = undef,
   $tls_reqcert    = undef,
   $tls_cacertfile = undef,
+  $tls_key        = undef,
   $pam_enable     = true,
   $nsswitch       = false,
 ) {

@@ -1,3 +1,9 @@
+puppet-module-plexxi-ldap (1.0.5) unstable; urgency=medium
+
+  * added missing 'tls_key" parameter to parameter list 
+
+ -- Matthew Morgan <matt.morgan@plexxi.com>  Mon, 13 Nov 2017 12:28:59 -0500
+
 puppet-module-plexxi-ldap (1.0.4) unstable; urgency=medium
 
   * when adding to nsswitch.conf place ldap in front 
