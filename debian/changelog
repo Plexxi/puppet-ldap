@@ -1,3 +1,10 @@
+puppet-module-plexxi-ldap (1.0.6) unstable; urgency=medium
+
+  * add missing 'tls_cert' param to parameter list
+  * update deprecated use of 'validate_bool' to avoid warning msgs
+
+ -- Joe Lorenz <joe.lorenz@plexxi.com>  Wed, 02 Jan 2019 11:28:03 -0500
+
 puppet-module-plexxi-ldap (1.0.5) unstable; urgency=medium
 
   * added missing 'tls_key" parameter to parameter list 

@@ -66,13 +66,14 @@ class ldap(
   $ssl            = undef,
   $tls_reqcert    = undef,
   $tls_cacertfile = undef,
+  $tls_cert       = undef,
   $tls_key        = undef,
   $pam_enable     = true,
   $nsswitch       = false,
 ) {
 
-  validate_bool($pam_enable)
-  validate_bool($nsswitch)
+  validate_legacy(Stdlib::Compat::Bool, validate_bool, $pam_enable)
+  validate_legacy(Stdlib::Compat::Bool, validate_bool, $nsswitch)
 
   exec { 'ldap_name_restart':
        command => '/usr/sbin/service nscd restart && /usr/sbin/service nslcd restart',
