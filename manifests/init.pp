@@ -59,21 +59,20 @@
 # Copyright 2016 Matthew Morgan, Plexxi, Inc
 #
 class ldap( 
-  $uri,
-  $basedn,
-  $binddn         = undef,
-  $bindpw         = undef,
-  $ssl            = undef,
-  $tls_reqcert    = undef,
-  $tls_cacertfile = undef,
-  $tls_cert       = undef,
-  $tls_key        = undef,
-  $pam_enable     = true,
-  $nsswitch       = false,
+  Array[String] $uri,
+  String  $basedn,
+  Optional[String]  $binddn,
+  Optional[String]  $bindpw,
+  Pattern[/(?i:^on)/,
+          /(?i:^off)/,  
+          /(?i:^tls_cert)/] $ssl = "off",
+  Optional[String] $tls_reqcert,
+  Optional[String] $tls_cacertfile,
+  Optional[String] $tls_cert,
+  Optional[String] $tls_key,
+  Boolean          $pam_enable = true,
+  Boolean          $nsswitch   = false,
 ) {
-
-  validate_legacy(Stdlib::Compat::Bool, validate_bool, $pam_enable)
-  validate_legacy(Stdlib::Compat::Bool, validate_bool, $nsswitch)
 
   exec { 'ldap_name_restart':
        command => '/usr/sbin/service nscd restart && /usr/sbin/service nslcd restart',

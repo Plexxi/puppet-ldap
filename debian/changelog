@@ -1,3 +1,9 @@
+puppet-module-plexxi-ldap (1.0.7) unstable; urgency=medium
+
+  * Only use tls_ vars if ssl is ON 
+
+ -- Matthew Morgan <matt.morgan@plexxi.com>  Mon, 14 Jan 2019 15:14:21 -0500
+
 puppet-module-plexxi-ldap (1.0.6) unstable; urgency=medium
 
   * add missing 'tls_cert' param to parameter list
