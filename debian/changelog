@@ -1,3 +1,9 @@
+puppet-module-plexxi-ldap (1.0.8) unstable; urgency=medium
+
+  * Give Optional params a default value of undef 
+
+ -- Matthew Morgan <matt.morgan@plexxi.com>  Mon, 28 Jan 2019 10:40:47 -0500
+
 puppet-module-plexxi-ldap (1.0.7) unstable; urgency=medium
 
   * Only use tls_ vars if ssl is ON 
